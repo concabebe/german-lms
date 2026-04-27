@@ -131,7 +131,7 @@ export function NotePanel({
         }}
         onBlur={handleBlur}
         placeholder="VD: Respondent có vẻ do dự khi trả lời. Cần follow-up thêm..."
-        className="w-full border border-black/[.08] rounded-[7px] py-[9px] px-3 font-sans text-[13px] text-[var(--text)] bg-white/70 resize-y min-h-[72px] outline-none transition-colors focus:border-[#EF9F27] placeholder:text-[var(--amber)] placeholder:opacity-70"
+        className="w-full border border-black/[.08] rounded-[7px] py-[9px] px-3 font-sans text-[13px] text-[var(--text)] bg-[var(--white)]/70 resize-y min-h-[72px] outline-none transition-colors focus:border-[#EF9F27] placeholder:text-[var(--amber)] placeholder:opacity-70"
       />
       <div
         className={`text-right text-[11px] mt-1 font-mono ${
@@ -156,7 +156,7 @@ export function NotePanel({
             className={`text-[10px] py-[3px] px-[9px] rounded-full border font-mono transition-all select-none cursor-pointer ${
               taggedQuestions.includes(key)
                 ? "bg-[var(--amber)] text-white border-[var(--amber)]"
-                : "bg-white/60 text-[var(--amber)] border-black/10 hover:bg-white/90"
+                : "bg-[var(--white)]/60 text-[var(--amber)] border-black/10 hover:bg-[var(--white)]/90"
             }`}
           >
             {key}
@@ -180,7 +180,7 @@ export function NotePanel({
             className={`text-[11px] py-1 px-[11px] rounded-full border transition-all cursor-pointer ${
               sentiment === opt.key
                 ? opt.activeClass
-                : "border-[var(--gray-m)] bg-white/60 text-[var(--muted)] hover:bg-white/90"
+                : "border-[var(--gray-m)] bg-[var(--white)]/60 text-[var(--muted)] hover:bg-[var(--white)]/90"
             }`}
           >
             {opt.label}

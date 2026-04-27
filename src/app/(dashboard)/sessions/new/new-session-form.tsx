@@ -89,7 +89,7 @@ export function NewSessionForm({ userId }: NewSessionFormProps) {
   };
 
   return (
-    <main className="max-w-2xl mx-auto px-6 py-10">
+    <main className="max-w-2xl mx-auto px-4 py-6 md:px-6 md:py-10">
       <button
         type="button"
         onClick={() => router.push("/sessions")}

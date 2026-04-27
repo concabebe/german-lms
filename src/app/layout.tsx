@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { DM_Sans, DM_Serif_Display, DM_Mono } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import "./globals.css";
 
 const dmSans = DM_Sans({
@@ -40,8 +41,10 @@ export default function RootLayout({
       className={`${dmSans.variable} ${dmSerif.variable} ${dmMono.variable}`}
     >
       <body className="font-sans antialiased">
-        {children}
-        <Toaster richColors position="bottom-right" duration={4000} />
+        <ThemeProvider>
+          {children}
+          <Toaster richColors position="bottom-right" duration={4000} />
+        </ThemeProvider>
       </body>
     </html>
   );

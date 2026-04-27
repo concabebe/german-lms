@@ -15,7 +15,7 @@ export function AdminContent() {
   const [activeTab, setActiveTab] = useState("users");
 
   return (
-    <main className="max-w-7xl mx-auto px-6 py-10">
+    <main className="max-w-7xl mx-auto px-4 py-6 md:px-6 md:py-10">
       <div className="mb-8">
         <h2 className="font-serif text-[28px] text-[var(--text)] mb-1">
           Admin Panel

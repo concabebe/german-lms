@@ -197,7 +197,7 @@ export function UsersTab() {
 
       {/* Invite form */}
       {showInvite && (
-        <div className="bg-white border border-[var(--gray-m)] rounded-lg p-4 mb-4 flex gap-3">
+        <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-4 mb-4 flex gap-3">
           <Input
             type="email"
             value={inviteEmail}
@@ -217,7 +217,7 @@ export function UsersTab() {
       )}
 
       {/* Users table */}
-      <div className="bg-white border border-[var(--gray-m)] rounded-lg overflow-hidden">
+      <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg overflow-hidden">
         <table className="w-full">
           <thead>
             <tr className="border-b border-[var(--gray-m)] bg-[var(--gray-l)]">
@@ -269,7 +269,7 @@ export function UsersTab() {
                       <ChevronDown className="h-3 w-3 text-[var(--muted)]" />
                     </button>
                     {roleDropdown === user.id && (
-                      <div className="absolute top-full left-1/2 -translate-x-1/2 z-10 bg-white border border-[var(--gray-m)] rounded-lg shadow-lg py-1 min-w-[100px]">
+                      <div className="absolute top-full left-1/2 -translate-x-1/2 z-10 bg-[var(--white)] border border-[var(--gray-m)] rounded-lg shadow-lg py-1 min-w-[100px]">
                         <button
                           type="button"
                           onClick={() => handleChangeRole(user.id, "admin")}

@@ -227,7 +227,7 @@ export function SessionsTab() {
               <ChevronDown className="h-3 w-3" />
             </button>
             {showStatusDropdown && (
-              <div className="absolute top-full left-0 mt-1 z-10 bg-white border border-[var(--gray-m)] rounded-lg shadow-lg py-1 min-w-[120px]">
+              <div className="absolute top-full left-0 mt-1 z-10 bg-[var(--white)] border border-[var(--gray-m)] rounded-lg shadow-lg py-1 min-w-[120px]">
                 {["all", "draft", "completed", "archived"].map((s) => (
                   <button
                     key={s}
@@ -251,7 +251,7 @@ export function SessionsTab() {
               <ChevronDown className="h-3 w-3" />
             </button>
             {showTypeDropdown && (
-              <div className="absolute top-full left-0 mt-1 z-10 bg-white border border-[var(--gray-m)] rounded-lg shadow-lg py-1 min-w-[140px]">
+              <div className="absolute top-full left-0 mt-1 z-10 bg-[var(--white)] border border-[var(--gray-m)] rounded-lg shadow-lg py-1 min-w-[140px]">
                 {["all", "learner", "teacher", "parent", "counselor", "cultural_official"].map((t) => (
                   <button
                     key={t}
@@ -279,7 +279,7 @@ export function SessionsTab() {
       </div>
 
       {/* Table */}
-      <div className="bg-white border border-[var(--gray-m)] rounded-lg overflow-hidden">
+      <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg overflow-hidden">
         <table className="w-full">
           <thead>
             <tr className="border-b border-[var(--gray-m)] bg-[var(--gray-l)]">
@@ -360,7 +360,7 @@ export function SessionsTab() {
       {/* Session detail modal */}
       {modalSession && (
         <div className="fixed inset-0 bg-black/40 z-50 flex items-center justify-center p-4">
-          <div className="bg-white rounded-xl shadow-2xl w-full max-w-4xl max-h-[85vh] overflow-hidden flex flex-col">
+          <div className="bg-[var(--white)] rounded-xl shadow-2xl w-full max-w-4xl max-h-[85vh] overflow-hidden flex flex-col">
             {/* Modal header */}
             <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--gray-m)]">
               <div>
