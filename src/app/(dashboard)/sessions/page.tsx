@@ -13,5 +13,11 @@ export default async function SessionsPage() {
     redirect("/login");
   }
 
-  return <SessionsContent user={user} />;
+  const { data: profile } = await supabase
+    .from("users")
+    .select("role")
+    .eq("id", user.id)
+    .single();
+
+  return <SessionsContent isAdmin={profile?.role === "admin"} />;
 }
