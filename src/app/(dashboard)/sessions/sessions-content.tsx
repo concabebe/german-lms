@@ -121,7 +121,7 @@ export function SessionsContent({ isAdmin = false }: SessionsContentProps) {
   };
 
   return (
-    <main className="max-w-7xl mx-auto px-6 py-10">
+    <main className="max-w-7xl mx-auto px-4 py-6 md:px-6 md:py-10">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
@@ -186,7 +186,7 @@ export function SessionsContent({ isAdmin = false }: SessionsContentProps) {
             <ChevronDown className="h-3.5 w-3.5" />
           </button>
           {showStatusDropdown && (
-            <div className="absolute top-full left-0 mt-1 bg-white border border-[var(--gray-m)] rounded-lg shadow-lg z-10 min-w-[160px]">
+            <div className="absolute top-full left-0 mt-1 bg-[var(--white)] border border-[var(--gray-m)] rounded-lg shadow-lg z-10 min-w-[160px]">
               {[
                 { value: "all", label: "Tất cả" },
                 { value: "draft", label: "Bản nháp" },
@@ -219,7 +219,7 @@ export function SessionsContent({ isAdmin = false }: SessionsContentProps) {
             <ChevronDown className="h-3.5 w-3.5" />
           </button>
           {showTypeDropdown && (
-            <div className="absolute top-full left-0 mt-1 bg-white border border-[var(--gray-m)] rounded-lg shadow-lg z-10 min-w-[180px]">
+            <div className="absolute top-full left-0 mt-1 bg-[var(--white)] border border-[var(--gray-m)] rounded-lg shadow-lg z-10 min-w-[180px]">
               {[
                 { value: "all", label: "Tất cả" },
                 { value: "learner", label: "LRN — Người học" },
@@ -288,8 +288,8 @@ export function SessionsContent({ isAdmin = false }: SessionsContentProps) {
           </CardContent>
         </Card>
       ) : (
-        <div className="border border-[var(--gray-m)] rounded-lg overflow-hidden">
-          <table className="w-full">
+        <div className="border border-[var(--gray-m)] rounded-lg overflow-x-auto">
+          <table className="w-full min-w-[700px]">
             <thead>
               <tr className="bg-[var(--gray-l)] border-b border-[var(--gray-m)]">
                 <th className="text-left px-4 py-3 text-[11px] font-semibold uppercase tracking-[0.08em] text-[var(--muted)]">

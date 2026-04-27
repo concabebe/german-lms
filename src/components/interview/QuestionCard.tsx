@@ -165,7 +165,7 @@ export function QuestionCard({
       : 0;
 
   return (
-    <div className="bg-white border border-[var(--gray-m)] rounded-[10px] p-5 mb-3 transition-all focus-within:border-[var(--purple)] focus-within:shadow-[0_0_0_3px_rgba(83,74,183,0.08)]">
+    <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-[10px] p-5 mb-3 transition-all focus-within:border-[var(--purple)] focus-within:shadow-[0_0_0_3px_rgba(83,74,183,0.08)]">
       {/* Header */}
       <div className="flex items-start gap-3 mb-3.5">
         <span
@@ -305,7 +305,7 @@ export function QuestionCard({
               onChange(question.key, e.target.value);
             }}
             placeholder="Nhập câu trả lời chi tiết..."
-            className="w-full border border-[var(--gray-m)] rounded-lg p-[10px_13px] font-sans text-[13px] text-[var(--text)] bg-white resize-y transition-colors outline-none focus:border-[var(--purple)] focus:shadow-[0_0_0_3px_rgba(83,74,183,0.08)] min-h-[90px]"
+            className="w-full border border-[var(--gray-m)] rounded-lg p-[10px_13px] font-sans text-[13px] text-[var(--text)] bg-[var(--white)] resize-y transition-colors outline-none focus:border-[var(--purple)] focus:shadow-[0_0_0_3px_rgba(83,74,183,0.08)] min-h-[90px]"
           />
           <div
             className={`text-right text-[11px] mt-1 font-mono ${
@@ -328,7 +328,7 @@ export function QuestionCard({
           value={typeof value === "string" ? value : ""}
           onChange={(e) => onChange(question.key, e.target.value)}
           placeholder="Nhập câu trả lời..."
-          className="w-full border border-[var(--gray-m)] rounded-lg py-[9px] px-[13px] font-sans text-[13px] text-[var(--text)] bg-white transition-colors outline-none focus:border-[var(--purple)] focus:shadow-[0_0_0_3px_rgba(83,74,183,0.08)]"
+          className="w-full border border-[var(--gray-m)] rounded-lg py-[9px] px-[13px] font-sans text-[13px] text-[var(--text)] bg-[var(--white)] transition-colors outline-none focus:border-[var(--purple)] focus:shadow-[0_0_0_3px_rgba(83,74,183,0.08)]"
         />
       )}
 
@@ -403,7 +403,7 @@ export function QuestionCard({
               onChange(`${question.key}_conditional`, e.target.value)
             }
             placeholder={question.conditional.placeholder}
-            className="w-full border border-[var(--gray-m)] rounded-lg py-[9px] px-[13px] font-sans text-[13px] text-[var(--text)] bg-white outline-none transition-colors focus:border-[var(--purple)] focus:shadow-[0_0_0_3px_rgba(83,74,183,0.08)]"
+            className="w-full border border-[var(--gray-m)] rounded-lg py-[9px] px-[13px] font-sans text-[13px] text-[var(--text)] bg-[var(--white)] outline-none transition-colors focus:border-[var(--purple)] focus:shadow-[0_0_0_3px_rgba(83,74,183,0.08)]"
           />
         </div>
       )}

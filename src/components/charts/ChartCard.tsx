@@ -23,7 +23,7 @@ export function ChartCard({
   return (
     <div
       id={id}
-      className="bg-white border border-[var(--gray-m)] rounded-lg p-5"
+      className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5"
     >
       <div className="mb-4">
         <h4 className="text-[14px] font-semibold text-[var(--text)]">

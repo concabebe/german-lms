@@ -198,9 +198,9 @@ export function InterviewEngine({
   const isLrn = activeGroup.key === "lrn";
 
   return (
-    <div className="grid grid-cols-[260px_1fr] min-h-screen">
+    <div className="grid grid-cols-1 md:grid-cols-[260px_1fr] min-h-screen">
       {/* Sidebar */}
-      <aside className="bg-white border-r border-[var(--gray-m)] py-7 sticky top-0 h-screen overflow-y-auto flex flex-col">
+      <aside className="bg-[var(--white)] border-r border-[var(--gray-m)] py-7 sticky top-0 h-screen overflow-y-auto hidden md:flex flex-col">
         <div className="px-6 pb-6 border-b border-[var(--gray-m)] mb-5">
           <div className="font-serif text-[17px] text-[var(--text)] leading-[1.3]">
             Interview Form
@@ -311,7 +311,7 @@ export function InterviewEngine({
       </aside>
 
       {/* Main content */}
-      <main className="py-10 px-12 max-w-[820px]">
+      <main className="py-6 px-4 md:py-10 md:px-12 max-w-[820px]">
         {/* Group header */}
         <div className="mb-8 pb-6 border-b border-[var(--gray-m)]">
           <div

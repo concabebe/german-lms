@@ -72,7 +72,7 @@ export function InsightsContent({
   const lowData = data.kpi.totalSessions < MIN_DATA_THRESHOLD;
 
   return (
-    <main className="max-w-7xl mx-auto px-6 py-10">
+    <main className="max-w-7xl mx-auto px-4 py-6 md:px-6 md:py-10">
       {/* Header */}
       <div className="flex items-center justify-between mb-8">
         <div>
@@ -105,7 +105,7 @@ export function InsightsContent({
 
       {/* Filters panel */}
       {showFilters && (
-        <div className="bg-white border border-[var(--gray-m)] rounded-lg p-4 mb-6">
+        <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-4 mb-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <label className="text-[11px] uppercase tracking-[0.08em] text-[var(--muted)] font-mono block mb-1.5">
@@ -137,7 +137,7 @@ export function InsightsContent({
                 <select
                   value={respondentType}
                   onChange={(e) => setRespondentType(e.target.value)}
-                  className="w-full border border-[var(--gray-m)] rounded-lg py-2 px-3 text-[12px] text-[var(--text)] bg-white appearance-none pr-8 outline-none focus:border-[var(--purple)]"
+                  className="w-full border border-[var(--gray-m)] rounded-lg py-2 px-3 text-[12px] text-[var(--text)] bg-[var(--white)] appearance-none pr-8 outline-none focus:border-[var(--purple)]"
                 >
                   {SEGMENT_OPTIONS.map((opt) => (
                     <option key={opt.value} value={opt.value}>
@@ -157,7 +157,7 @@ export function InsightsContent({
                   <select
                     value={interviewerId}
                     onChange={(e) => setInterviewerId(e.target.value)}
-                    className="w-full border border-[var(--gray-m)] rounded-lg py-2 px-3 text-[12px] text-[var(--text)] bg-white appearance-none pr-8 outline-none focus:border-[var(--purple)]"
+                    className="w-full border border-[var(--gray-m)] rounded-lg py-2 px-3 text-[12px] text-[var(--text)] bg-[var(--white)] appearance-none pr-8 outline-none focus:border-[var(--purple)]"
                   >
                     <option value="">Tất cả</option>
                     {interviewers.map((i) => (
@@ -332,7 +332,7 @@ export function InsightsContent({
             <ChartCard id="g2" title="Most tagged questions" isEmpty={lowData}>
               <BarChartComponent data={data.g2} color="#854F0B" />
             </ChartCard>
-            <div className="bg-white border border-[var(--gray-m)] rounded-lg p-5">
+            <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5">
               <h4 className="text-[14px] font-semibold text-[var(--text)] mb-4">
                 <span className="font-mono text-[11px] text-[var(--muted)] mr-2">
                   G3
@@ -366,7 +366,7 @@ export function InsightsContent({
                 </div>
               </div>
             </div>
-            <div className="bg-white border border-[var(--gray-m)] rounded-lg p-5 flex items-center justify-center">
+            <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5 flex items-center justify-center">
               <Button
                 disabled
                 variant="outline"
@@ -399,7 +399,7 @@ function KPICard({
   small?: boolean;
 }) {
   return (
-    <div className="bg-white border border-[var(--gray-m)] rounded-lg px-4 py-4">
+    <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg px-4 py-4">
       <div className="text-[11px] font-mono uppercase tracking-[0.08em] text-[var(--muted)] mb-1">
         {label}
       </div>

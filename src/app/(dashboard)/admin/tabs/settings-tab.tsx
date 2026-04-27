@@ -167,7 +167,7 @@ function Section({
   return (
     <div className="mb-8">
       <h3 className="font-serif text-[16px] text-[var(--text)] mb-4">{title}</h3>
-      <div className="bg-white border border-[var(--gray-m)] rounded-lg p-5">
+      <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5">
         {children}
       </div>
     </div>
@@ -199,7 +199,7 @@ function ToggleRow({
         }`}
       >
         <div
-          className={`w-4 h-4 bg-white rounded-full shadow-sm absolute top-0.5 transition-transform ${
+          className={`w-4 h-4 bg-[var(--white)] rounded-full shadow-sm absolute top-0.5 transition-transform ${
             checked ? "translate-x-5" : "translate-x-0.5"
           }`}
         />

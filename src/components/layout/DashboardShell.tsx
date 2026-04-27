@@ -10,10 +10,13 @@ import {
   LogOut,
   ChevronLeft,
   ChevronRight,
+  Moon,
+  Sun,
 } from "lucide-react";
 import { toast } from "sonner";
 import type { User } from "@supabase/supabase-js";
 import { useState } from "react";
+import { useTheme } from "@/components/theme/ThemeProvider";
 
 interface DashboardShellProps {
   user: User;
@@ -27,18 +30,21 @@ const NAV_ITEMS = [
     href: "/sessions",
     icon: FileText,
     label: "Phiên interview",
+    shortLabel: "Sessions",
     matchPrefix: "/sessions",
   },
   {
     href: "/insights",
     icon: BarChart3,
     label: "Insights",
+    shortLabel: "Insights",
     matchPrefix: "/insights",
   },
   {
     href: "/product-analysis",
     icon: FlaskConical,
     label: "Product Analysis",
+    shortLabel: "Analysis",
     matchPrefix: "/product-analysis",
     adminOnly: true,
   },
@@ -46,6 +52,7 @@ const NAV_ITEMS = [
     href: "/admin",
     icon: Settings,
     label: "Admin",
+    shortLabel: "Admin",
     matchPrefix: "/admin",
     adminOnly: true,
   },
@@ -59,6 +66,7 @@ export function DashboardShell({
   const pathname = usePathname();
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const isInterviewPage = pathname.includes("/questions");
 
@@ -74,13 +82,15 @@ export function DashboardShell({
     return <div className="min-h-screen bg-[var(--bg)]">{children}</div>;
   }
 
+  const visibleNav = NAV_ITEMS.filter((item) => !item.adminOnly || isAdmin);
+
   return (
     <div className="min-h-screen bg-[var(--bg)] flex">
-      {/* Sidebar */}
+      {/* Desktop Sidebar — hidden on mobile */}
       <aside
         className={`${
           collapsed ? "w-[64px]" : "w-[240px]"
-        } bg-white border-r border-[var(--gray-m)] flex flex-col transition-all duration-200 shrink-0`}
+        } bg-[var(--white)] border-r border-[var(--gray-m)] hidden md:flex flex-col transition-all duration-200 shrink-0 sticky top-0 h-screen`}
       >
         {/* Logo */}
         <div className="p-4 border-b border-[var(--gray-m)]">
@@ -103,33 +113,49 @@ export function DashboardShell({
         </div>
 
         {/* Nav */}
-        <nav className="flex-1 py-3 px-2">
-          {NAV_ITEMS.filter((item) => !item.adminOnly || isAdmin).map(
-            (item) => {
-              const active = pathname.startsWith(item.matchPrefix);
-              const Icon = item.icon;
-              return (
-                <button
-                  key={item.href}
-                  type="button"
-                  onClick={() => router.push(item.href)}
-                  className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] transition-colors mb-0.5 ${
-                    active
-                      ? "bg-[var(--purple-l)] text-[var(--purple)] font-medium"
-                      : "text-[var(--muted)] hover:bg-[var(--gray-l)] hover:text-[var(--text)]"
-                  }`}
-                  title={collapsed ? item.label : undefined}
-                >
-                  <Icon className="h-4 w-4 shrink-0" />
-                  {!collapsed && <span>{item.label}</span>}
-                </button>
-              );
-            }
-          )}
+        <nav className="flex-1 py-3 px-2 overflow-y-auto">
+          {visibleNav.map((item) => {
+            const active = pathname.startsWith(item.matchPrefix);
+            const Icon = item.icon;
+            return (
+              <button
+                key={item.href}
+                type="button"
+                onClick={() => router.push(item.href)}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] transition-colors mb-0.5 ${
+                  active
+                    ? "bg-[var(--purple-l)] text-[var(--purple)] font-medium"
+                    : "text-[var(--muted)] hover:bg-[var(--gray-l)] hover:text-[var(--text)]"
+                }`}
+                title={collapsed ? item.label : undefined}
+              >
+                <Icon className="h-4 w-4 shrink-0" />
+                {!collapsed && <span>{item.label}</span>}
+              </button>
+            );
+          })}
         </nav>
 
-        {/* Collapse toggle */}
-        <div className="px-2 pb-2">
+        {/* Dark mode toggle + Collapse */}
+        <div className="px-2 pb-2 space-y-1">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-lg text-[12px] text-[var(--muted)] hover:bg-[var(--gray-l)] transition-colors"
+            title={theme === "light" ? "Chế độ tối" : "Chế độ sáng"}
+          >
+            {theme === "light" ? (
+              <>
+                <Moon className="h-3.5 w-3.5" />
+                {!collapsed && <span>Chế độ tối</span>}
+              </>
+            ) : (
+              <>
+                <Sun className="h-3.5 w-3.5" />
+                {!collapsed && <span>Chế độ sáng</span>}
+              </>
+            )}
+          </button>
           <button
             type="button"
             onClick={() => setCollapsed(!collapsed)}
@@ -179,9 +205,40 @@ export function DashboardShell({
       </aside>
 
       {/* Main content */}
-      <div className="flex-1 min-w-0 overflow-auto">
+      <div className="flex-1 min-w-0 overflow-auto pb-16 md:pb-0">
         {children}
       </div>
+
+      {/* Mobile bottom nav — visible on mobile only */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-[var(--white)] border-t border-[var(--gray-m)] flex md:hidden z-40">
+        {visibleNav.map((item) => {
+          const active = pathname.startsWith(item.matchPrefix);
+          const Icon = item.icon;
+          return (
+            <button
+              key={item.href}
+              type="button"
+              onClick={() => router.push(item.href)}
+              className={`flex-1 flex flex-col items-center gap-0.5 py-2.5 text-[10px] transition-colors ${
+                active
+                  ? "text-[var(--purple)] font-medium"
+                  : "text-[var(--muted)]"
+              }`}
+            >
+              <Icon className="h-5 w-5" />
+              <span>{item.shortLabel}</span>
+            </button>
+          );
+        })}
+        <button
+          type="button"
+          onClick={toggleTheme}
+          className="flex-1 flex flex-col items-center gap-0.5 py-2.5 text-[10px] text-[var(--muted)] transition-colors"
+        >
+          {theme === "light" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />}
+          <span>{theme === "light" ? "Tối" : "Sáng"}</span>
+        </button>
+      </nav>
     </div>
   );
 }

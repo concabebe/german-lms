@@ -166,7 +166,7 @@ export function ReviewContent({
   };
 
   return (
-    <main className="max-w-4xl mx-auto px-6 py-10">
+    <main className="max-w-4xl mx-auto px-4 py-6 md:px-6 md:py-10">
       {/* Header */}
       <button
         type="button"
@@ -206,7 +206,7 @@ export function ReviewContent({
       </div>
 
       {/* Respondent info card */}
-      <div className="bg-white border border-[var(--gray-m)] rounded-lg p-5 mb-6">
+      <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5 mb-6">
         <h3 className="font-serif text-[16px] text-[var(--text)] mb-4">
           Thông tin respondent
         </h3>
@@ -277,7 +277,7 @@ export function ReviewContent({
       </div>
 
       {/* Progress */}
-      <div className="bg-white border border-[var(--gray-m)] rounded-lg p-5 mb-6">
+      <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5 mb-6">
         <div className="flex items-center justify-between mb-3">
           <h3 className="font-serif text-[16px] text-[var(--text)]">
             Tiến độ
@@ -319,7 +319,7 @@ export function ReviewContent({
               return (
                 <div
                   key={secKey}
-                  className="bg-white border border-[var(--gray-m)] rounded-lg p-5 mb-4"
+                  className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5 mb-4"
                 >
                   <h4 className="text-[14px] font-semibold text-[var(--text)] mb-3">
                     {section.title}
@@ -400,7 +400,7 @@ export function ReviewContent({
                               {noteData.tags.map((tag) => (
                                 <span
                                   key={tag}
-                                  className="text-[10px] font-mono px-1.5 py-0.5 bg-white/60 rounded-md text-[#854F0B]"
+                                  className="text-[10px] font-mono px-1.5 py-0.5 bg-[var(--white)]/60 rounded-md text-[#854F0B]"
                                 >
                                   {tag}
                                 </span>
@@ -419,7 +419,7 @@ export function ReviewContent({
       })}
 
       {/* General session note */}
-      <div className="bg-white border border-[var(--gray-m)] rounded-lg p-5 mb-6">
+      <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5 mb-6">
         <h3 className="font-serif text-[16px] text-[var(--text)] mb-3">
           Ghi chú chung
         </h3>
@@ -436,7 +436,7 @@ export function ReviewContent({
               }}
               onBlur={handleSaveNote}
               placeholder="Nhập ghi chú chung về phiên phỏng vấn..."
-              className="w-full border border-[var(--gray-m)] rounded-lg p-3 font-sans text-[13px] text-[var(--text)] bg-white resize-y min-h-[100px] outline-none focus:border-[var(--purple)] focus:shadow-[0_0_0_3px_rgba(83,74,183,0.08)] transition-colors"
+              className="w-full border border-[var(--gray-m)] rounded-lg p-3 font-sans text-[13px] text-[var(--text)] bg-[var(--white)] resize-y min-h-[100px] outline-none focus:border-[var(--purple)] focus:shadow-[0_0_0_3px_rgba(83,74,183,0.08)] transition-colors"
             />
             <div className="text-right text-[11px] text-[var(--muted)] font-mono mt-1">
               {noteCharCount} / 2000

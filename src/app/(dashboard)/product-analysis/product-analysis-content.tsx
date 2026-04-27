@@ -95,7 +95,7 @@ export function ProductAnalysisContent({ data, userId }: Props) {
   const lowData = data.mvpMatrix.length === 0;
 
   return (
-    <main className="max-w-7xl mx-auto px-6 py-10">
+    <main className="max-w-7xl mx-auto px-4 py-6 md:px-6 md:py-10">
       <div className="mb-8">
         <h2 className="font-serif text-[28px] text-[var(--text)] mb-1">
           Product Analysis
@@ -119,7 +119,7 @@ export function ProductAnalysisContent({ data, userId }: Props) {
 
       {/* Section A — MVP Scope Matrix */}
       <SectionTitle id="A" title="MVP Scope Matrix" />
-      <div className="bg-white border border-[var(--gray-m)] rounded-lg overflow-hidden mb-8">
+      <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg overflow-hidden mb-8">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
@@ -190,7 +190,7 @@ export function ProductAnalysisContent({ data, userId }: Props) {
       <SectionTitle id="B" title="Segment Strategy" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         {/* Bubble chart */}
-        <div className="bg-white border border-[var(--gray-m)] rounded-lg p-5">
+        <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5">
           <h4 className="text-[14px] font-semibold text-[var(--text)] mb-3">
             Segment size vs Avg WTP
           </h4>
@@ -230,7 +230,7 @@ export function ProductAnalysisContent({ data, userId }: Props) {
         </div>
 
         {/* Heatmap */}
-        <div className="bg-white border border-[var(--gray-m)] rounded-lg p-5">
+        <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5">
           <h4 className="text-[14px] font-semibold text-[var(--text)] mb-3">
             Pain × Segment heatmap
           </h4>
@@ -294,7 +294,7 @@ export function ProductAnalysisContent({ data, userId }: Props) {
       {/* Section C — Pricing Analysis */}
       <SectionTitle id="C" title="Pricing Analysis" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-        <div className="bg-white border border-[var(--gray-m)] rounded-lg p-5">
+        <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5">
           <h4 className="text-[14px] font-semibold text-[var(--text)] mb-3">
             WTP Distribution
           </h4>
@@ -324,7 +324,7 @@ export function ProductAnalysisContent({ data, userId }: Props) {
           )}
         </div>
 
-        <div className="bg-white border border-[var(--gray-m)] rounded-lg p-5">
+        <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5">
           <h4 className="text-[14px] font-semibold text-[var(--text)] mb-3">
             Tier Recommendation
           </h4>
@@ -400,7 +400,7 @@ export function ProductAnalysisContent({ data, userId }: Props) {
       {/* Section D — Trust & Conversion */}
       <SectionTitle id="D" title="Trust & Conversion" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-        <div className="bg-white border border-[var(--gray-m)] rounded-lg p-5">
+        <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5">
           <h4 className="text-[14px] font-semibold text-[var(--text)] mb-3">
             Trust Signals Ranking
           </h4>
@@ -428,7 +428,7 @@ export function ProductAnalysisContent({ data, userId }: Props) {
           )}
         </div>
 
-        <div className="bg-white border border-[var(--gray-m)] rounded-lg p-5">
+        <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5">
           <h4 className="text-[14px] font-semibold text-[var(--text)] mb-3">
             Conversion Barriers (Detractor × Factors)
           </h4>
@@ -484,7 +484,7 @@ export function ProductAnalysisContent({ data, userId }: Props) {
       {/* Section E — Risk & Gaps */}
       <SectionTitle id="E" title="Risk & Gaps" />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-        <div className="bg-white border border-[var(--gray-m)] rounded-lg p-5">
+        <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5">
           <h4 className="text-[14px] font-semibold text-[var(--text)] mb-3">
             Top 5 Competitive Gaps
           </h4>
@@ -507,7 +507,7 @@ export function ProductAnalysisContent({ data, userId }: Props) {
           )}
         </div>
 
-        <div className="bg-white border border-[var(--gray-m)] rounded-lg p-5">
+        <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5">
           <h4 className="text-[14px] font-semibold text-[var(--text)] mb-3">
             Dropout Risk × Segment
           </h4>
@@ -555,7 +555,7 @@ export function ProductAnalysisContent({ data, userId }: Props) {
 
       {/* Section F — Qualitative Signals */}
       <SectionTitle id="F" title="Qualitative Signals" />
-      <div className="bg-white border border-[var(--gray-m)] rounded-lg p-5 mb-8">
+      <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5 mb-8">
         <h4 className="text-[14px] font-semibold text-[var(--text)] mb-4">
           <Star className="inline h-4 w-4 mr-1.5 text-[#EF9F27]" />
           Notable Session Notes
@@ -647,7 +647,7 @@ function InsightEditor({
   saving: boolean;
 }) {
   return (
-    <div className="bg-white border border-[var(--gray-m)] rounded-lg p-5 mb-8">
+    <div className="bg-[var(--white)] border border-[var(--gray-m)] rounded-lg p-5 mb-8">
       <h4 className="text-[14px] font-semibold text-[var(--text)] mb-2">
         Admin Insight — {sectionKey.replace("_", " ")}
       </h4>
@@ -655,7 +655,7 @@ function InsightEditor({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder="Ghi nhận xét phân tích, đề xuất chiến lược..."
-        className="w-full border border-[var(--gray-m)] rounded-lg p-3 font-sans text-[13px] text-[var(--text)] bg-white resize-y min-h-[80px] outline-none focus:border-[var(--purple)] focus:shadow-[0_0_0_3px_rgba(83,74,183,0.08)] transition-colors"
+        className="w-full border border-[var(--gray-m)] rounded-lg p-3 font-sans text-[13px] text-[var(--text)] bg-[var(--white)] resize-y min-h-[80px] outline-none focus:border-[var(--purple)] focus:shadow-[0_0_0_3px_rgba(83,74,183,0.08)] transition-colors"
       />
       <div className="flex justify-end mt-2">
         <Button
