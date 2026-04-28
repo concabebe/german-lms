@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useCallback, useMemo, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 import type { Json } from "@/types/database";
 import type { GroupKey } from "@/lib/questions/types";
 import {
@@ -37,6 +39,8 @@ export function InterviewEngine({
   const [activeSections, setActiveSections] = useState<Record<string, string>>(
     {}
   );
+  const [saving, setSaving] = useState(false);
+  const router = useRouter();
 
   const autoSave = useAutoSave(sessionId);
 
@@ -409,7 +413,21 @@ export function InterviewEngine({
               >
                 {groupSections[sectionKeys[currentSectionIndex + 1]]?.title.split(" · ")[0]} →
               </button>
-            ) : null}
+            ) : (
+              <button
+                type="button"
+                disabled={saving}
+                onClick={async () => {
+                  setSaving(true);
+                  await autoSave.flushAll();
+                  toast.success("Đã lưu tất cả câu trả lời");
+                  router.push(`/sessions/${sessionId}/review`);
+                }}
+                className="font-sans text-[13px] font-medium py-2 px-5 rounded-lg cursor-pointer transition-all bg-[var(--purple)] text-white border border-[var(--purple)] hover:bg-[#4740A3] disabled:opacity-50"
+              >
+                {saving ? "Đang lưu..." : "Lưu & Xem lại →"}
+              </button>
+            )}
           </div>
         )}
 
@@ -439,7 +457,21 @@ export function InterviewEngine({
               >
                 {groups[activeGroupIndex + 1]?.label.split(" — ")[0]} →
               </button>
-            ) : null}
+            ) : (
+              <button
+                type="button"
+                disabled={saving}
+                onClick={async () => {
+                  setSaving(true);
+                  await autoSave.flushAll();
+                  toast.success("Đã lưu tất cả câu trả lời");
+                  router.push(`/sessions/${sessionId}/review`);
+                }}
+                className="font-sans text-sm font-medium py-2.5 px-6 rounded-lg cursor-pointer transition-all bg-[var(--purple)] text-white border-none hover:bg-[#4740A3] disabled:opacity-50"
+              >
+                {saving ? "Đang lưu..." : "Lưu & Xem lại →"}
+              </button>
+            )}
           </div>
         )}
       </main>
