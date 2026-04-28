@@ -7,6 +7,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import {
   ChevronDown,
   Download,
+  FileSpreadsheet,
   Eye,
   X,
   MessageSquare,
@@ -188,6 +189,111 @@ export function SessionsTab() {
     toast.success(`Đã xuất ${selected.length} phiên`);
   };
 
+  const [exporting, setExporting] = useState(false);
+
+  const exportAllSessions = async () => {
+    setExporting(true);
+    try {
+      const supabase = createClient();
+
+      const { data: allSessions, error: sessionsError } = await supabase
+        .from("interview_sessions")
+        .select("*")
+        .order("created_at", { ascending: true });
+
+      if (sessionsError || !allSessions?.length) {
+        toast.error(allSessions?.length === 0 ? "Không có phiên nào để xuất" : "Lỗi tải dữ liệu phiên");
+        setExporting(false);
+        return;
+      }
+
+      const sessionIds = allSessions.map((s) => s.id);
+      const { data: allResponses, error: responsesError } = await supabase
+        .from("responses")
+        .select("session_id, question_key, answer_value")
+        .in("session_id", sessionIds);
+
+      if (responsesError) {
+        toast.error("Lỗi tải câu trả lời");
+        setExporting(false);
+        return;
+      }
+
+      const responseMap = new Map<string, Map<string, Json>>();
+      (allResponses || []).forEach((r) => {
+        if (!responseMap.has(r.session_id)) {
+          responseMap.set(r.session_id, new Map());
+        }
+        responseMap.get(r.session_id)!.set(r.question_key, r.answer_value);
+      });
+
+      const allQuestionKeys: string[] = [];
+      const questionLabels: Record<string, string> = {};
+      Object.keys(QUESTIONS).forEach((key) => {
+        allQuestionKeys.push(key);
+        const q = QUESTIONS[key];
+        questionLabels[key] = `[${key}] ${q.text.slice(0, 80)}`;
+      });
+
+      const metaHeaders = [
+        "STT",
+        "Session ID",
+        "Trạng thái",
+        "Loại respondent",
+        "Họ tên",
+        "Năm sinh",
+        "Giới tính",
+        "Địa điểm",
+        "Nghề nghiệp",
+        "Số điện thoại",
+        "Ghi chú phiên",
+        "Ngày tạo",
+        "Ngày hoàn thành",
+      ];
+      const headers = [...metaHeaders, ...allQuestionKeys.map((k) => questionLabels[k])];
+
+      const csvEscape = (val: string) => `"${val.replace(/"/g, '""').replace(/\n/g, " ")}"`;
+
+      const rows = allSessions.map((s, idx) => {
+        const sessionResponses = responseMap.get(s.id) || new Map();
+        const meta = [
+          String(idx + 1),
+          s.id,
+          s.session_status,
+          s.respondent_type,
+          s.respondent_full_name,
+          String(s.respondent_birth_year),
+          s.respondent_gender,
+          s.respondent_location,
+          s.respondent_occupation || "",
+          s.respondent_phone || "",
+          (s.session_note || "").replace(/\n/g, " "),
+          new Date(s.created_at).toLocaleDateString("vi-VN"),
+          s.completed_at ? new Date(s.completed_at).toLocaleDateString("vi-VN") : "",
+        ];
+        const answers = allQuestionKeys.map((key) => {
+          const val = sessionResponses.get(key);
+          return formatAnswer(val as Json);
+        });
+        return [...meta, ...answers].map(csvEscape).join(",");
+      });
+
+      const bom = "\uFEFF";
+      const csv = bom + headers.map(csvEscape).join(",") + "\n" + rows.join("\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `all-sessions-export-${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+      URL.revokeObjectURL(url);
+      toast.success(`Đã xuất toàn bộ ${allSessions.length} phiên`);
+    } catch {
+      toast.error("Lỗi xuất dữ liệu");
+    }
+    setExporting(false);
+  };
+
   const formatAnswer = (value: Json): string => {
     if (value === null || value === undefined) return "—";
     if (typeof value === "string") return value;
@@ -266,16 +372,28 @@ export function SessionsTab() {
             )}
           </div>
         </div>
-        <Button
-          size="sm"
-          variant="outline"
-          onClick={exportCSV}
-          disabled={selectedIds.size === 0}
-          className="text-[12px] border-[var(--gray-m)] text-[var(--muted)]"
-        >
-          <Download className="h-3.5 w-3.5 mr-1" />
-          Export CSV ({selectedIds.size})
-        </Button>
+        <div className="flex items-center gap-2">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={exportAllSessions}
+            disabled={exporting}
+            className="text-[12px] border-[var(--purple)] text-[var(--purple)] hover:bg-[var(--purple-l)]"
+          >
+            <FileSpreadsheet className="h-3.5 w-3.5 mr-1" />
+            {exporting ? "Đang xuất..." : "Xuất toàn bộ"}
+          </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={exportCSV}
+            disabled={selectedIds.size === 0}
+            className="text-[12px] border-[var(--gray-m)] text-[var(--muted)]"
+          >
+            <Download className="h-3.5 w-3.5 mr-1" />
+            Export CSV ({selectedIds.size})
+          </Button>
+        </div>
       </div>
 
       {/* Table */}
