@@ -221,7 +221,7 @@ export async function fetchInsightsData(
   let sessionsQuery = supabase
     .from("interview_sessions")
     .select("id, respondent_type, respondent_location, respondent_gender, created_by, created_at")
-    .eq("session_status", "completed");
+    .in("session_status", ["completed", "archived"]);
 
   if (filters.dateFrom) sessionsQuery = sessionsQuery.gte("created_at", filters.dateFrom);
   if (filters.dateTo) sessionsQuery = sessionsQuery.lte("created_at", filters.dateTo);
