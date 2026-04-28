@@ -104,7 +104,7 @@ export async function fetchProductAnalysisData(): Promise<ProductAnalysisData> {
   const { data: sessions } = await supabase
     .from("interview_sessions")
     .select("id, respondent_type, respondent_full_name")
-    .eq("session_status", "completed");
+    .in("session_status", ["completed", "archived"]);
 
   const sessionIds = (sessions || []).map((s) => s.id);
   const sessionType: Record<string, string> = {};

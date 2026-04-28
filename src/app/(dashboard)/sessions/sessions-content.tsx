@@ -13,6 +13,7 @@ import {
   FileText,
   Eye,
   Archive,
+  ArchiveRestore,
   Trash2,
   ChevronDown,
 } from "lucide-react";
@@ -93,6 +94,20 @@ export function SessionsContent({ isAdmin = false }: SessionsContentProps) {
       toast.error("Không thể lưu trữ phiên");
     } else {
       toast.success("Đã lưu trữ phiên");
+      fetchSessions();
+    }
+  };
+
+  const handleReopen = async (sessionId: string) => {
+    const supabase = createClient();
+    const { error } = await supabase
+      .from("interview_sessions")
+      .update({ session_status: "draft" })
+      .eq("id", sessionId);
+    if (error) {
+      toast.error("Không thể mở lại phiên");
+    } else {
+      toast.success("Đã mở lại phiên");
       fetchSessions();
     }
   };
@@ -392,6 +407,16 @@ export function SessionsContent({ isAdmin = false }: SessionsContentProps) {
                             title="Lưu trữ"
                           >
                             <Archive className="h-4 w-4" />
+                          </button>
+                        )}
+                        {session.session_status === "archived" && isAdmin && (
+                          <button
+                            type="button"
+                            onClick={() => handleReopen(session.id)}
+                            className="p-1.5 rounded-md hover:bg-[var(--teal-l)] text-[var(--teal)] transition-colors"
+                            title="Mở lại phiên"
+                          >
+                            <ArchiveRestore className="h-4 w-4" />
                           </button>
                         )}
                         <button

@@ -107,11 +107,19 @@ export function useAutoSave(sessionId: string) {
     flush();
   }, [flush]);
 
+  const flushAll = useCallback(async () => {
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+    await flush();
+  }, [flush]);
+
   return {
     ...state,
     saveResponse,
     saveImmediately,
     saveNote,
+    flushAll,
     retry,
   };
 }
